@@ -1,10 +1,11 @@
 # CSV-Event-Lambda
 Lambda function to read a csv file on S3 event and store data in sqlite3
 
-
-Pre-requisite - 
-  1 - Please make sure Lambda function has permission to S3, SNS service.
-  2 - Timeout is more than 3 seconds
-  3 - Runtime Settings, Handler = handler.handler
-  4 - Create a virtual environment and install sqlite3, pandas and use cli command to upload the package on AWS Lambda
-  5 - Create a test event on Lambda function with Event Template = Amazon S3 Put and in Records -> s3 -> bucket = provide your bucket name
+1 - Lambda function picks the Key Name from the event of the specified bucket and store it in 'keyName'.
+2 - Opens a sqlite DB connection.
+3 - Gets the object from S3, using get_object with Bucket = <your bucket name> and Key = keyName (event based key detail)
+4 - If the object ends with .csv, lambda reads the body of the object and store it in pandas dataframe.
+5 - Using list comprehension, lambda read all the record from the dataframe and store it in toDB_Values and bulk insert the records in csvfile table of csvFile.db of sqlite3.
+ 
+  
+**Deploy - ** Create python virtual environment and perform pip install sqlite3 and pandas and upload the bundle to lambda function using AWS CLI command.
