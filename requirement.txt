@@ -1,0 +1,11 @@
+Pre-requisite - 
+
+1 - Please make sure Lambda function has permission to S3, SNS service. 
+2 - Timeout is more than 3 seconds 
+3 - Runtime Settings, Handler = handler.handler 
+4 - Create csvFile.db using 'sqlite3 csvFile' command.
+5 - Add Trigger on Lambda with below configuration -
+    a - Bucket - Bucket Name on which the action is performed.
+    b - Event Type - PUT event, whenever any upload happens.
+    c - Prefix - If there is any folder where upload will happen in the bucket.
+6 - Create a test event on Lambda function with Event Template = Amazon S3 Put and in Records -> s3 -> bucket = provide your bucket name
