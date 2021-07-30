@@ -20,7 +20,6 @@ def handler(event, context):
                 response = sns.publish(TopicArn='<SNS Topic ARN>',Message="Hi\n\nMentioned exception has been occurred in handler lambda function. CSV file evaluation process aborts here.\n\n" + str(ex),)
                 
             to_db = [(row['batch'], row['start'], row['end'], row['records'], row['pass'], row['message']) for index, row in df.iterrows()]
-            print("to DB ")
             cur.executemany("INSERT INTO csvfile (batch, start, end, records, pass, message) VALUES (?, ?, ?, ?, ?, ?);", to_db)
             con.commit()
             con.close()
