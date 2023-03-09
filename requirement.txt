@@ -1,4 +1,4 @@
-Pre-requisite - 
+Pre-Requisite- 
 
 1 - Please make sure Lambda function has permission to S3, SNS service. 
 2 - Timeout is more than 3 seconds 
